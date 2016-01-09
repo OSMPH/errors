@@ -28,14 +28,7 @@ var properties = [{
     visible: true,
     sortable: true
   },
-  filter: {
-    type: "string",
-    input: "checkbox",
-    vertical: true,
-    multiple: true,
-    operators: ["in", "not_in", "equal", "not_equal"],
-    values: []
-  }
+  filter: false 
 },
 {
   value: "_osm_node_id",
@@ -44,14 +37,7 @@ var properties = [{
     visible: true,
     sortable: true
    },
-   filter: {
-     type: "string",
-     input: "checkbox",
-     vertical: true,
-     multiple: true,
-     operators: ["in", "not_in", "equal", "not_equal"],
-     values: []
-   }
+   filter: false 
 },
 {
    value: "_version",
@@ -60,14 +46,7 @@ var properties = [{
      visible: true,
      sortable: true
     },
-    filter: {
-      type: "integer",
-      input: "checkbox",
-      vertical: true,
-      multiple: true,
-      operators: ["in", "not_in", "equal", "not_equal"],
-      values: []
-    }
+    filter: false 
 },
 {
     value: "_changeset",
@@ -76,14 +55,7 @@ var properties = [{
       visible: true,
       sortable: true
     },
-    filter: {
-      type: "integer",
-      input: "checkbox",
-      vertical: true,
-      multiple: true,
-      operators: ["in", "not_in", "equal", "not_equal"],
-      values: []
-    }
+    filter: false
 },
 {
     value: "_user",
