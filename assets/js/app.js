@@ -178,7 +178,7 @@ var properties = [{
 }];
 
 function drawCharts() {
-  // Status
+  // Errors
   $(function() {
     var result = alasql("SELECT _osmlint AS label, COUNT(*) AS total FROM ? GROUP BY _osmlint", [features]);
     var columns = $.map(result, function(_osmlint) {
@@ -187,13 +187,13 @@ function drawCharts() {
     var chart = c3.generate({
         bindto: "#status-chart",
         data: {
-          type: "pie",
+          type: "bar",
           columns: columns
         }
     });
   });
 
-  // Zones
+  // Users
   $(function() {
     var result = alasql("SELECT _user AS label, COUNT(*) AS total FROM ? GROUP BY _user", [features]);
     var columns = $.map(result, function(_user) {
@@ -202,9 +202,11 @@ function drawCharts() {
     var chart = c3.generate({
         bindto: "#zone-chart",
         data: {
-          type: "pie",
-          columns: columns
-        }
+          type: "bar",
+          columns: columns,
+	  order: 'desc'
+	    },
+	
     });
   });
 }
@@ -305,7 +307,7 @@ function buildConfig() {
 // Basemap Layers
 
 var mapquestOSM = L.tileLayer("http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png", {
-	maxZoom: 19,
+        maxZoom: 19,
 	subdomains: ["otile1", "otile2", "otile3", "otile4"],
 	attribution: 'Tiles courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="http://developer.mapquest.com/content/osm/mq_logo.png">. Map data (c) <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> contributors, CC-BY-SA.'
     });
@@ -394,6 +396,7 @@ $.getJSON(config.geojson, function (data) {
 });
 
 var map = L.map("map", {
+	zoomControl:false,
   layers: [mapquestOSM, featureLayer, highlightLayer]
 }).fitWorld();
 
