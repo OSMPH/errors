@@ -2,7 +2,7 @@ var config = {
   geojson: "https://gist.githubusercontent.com/anonymous/ff1279dfd06ec9dad54d/raw/178c7adfb7c879178cb9a1e30e79edc8259bd8a1/results.json",
   title: "OSMLint",
   layerName: "OSMLint",
-  hoverProperty: "_josm_url",
+  hoverProperty: "_osmlint",
   sortProperty: "_osmlint",
   sortOrder: "_osmlint"
 };
