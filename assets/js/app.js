@@ -278,12 +278,14 @@ function buildConfig() {
 
 // Basemap Layers
 
-var mapquestOSM = L.tileLayer("http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png", {
-        maxZoom: 19,
-	subdomains: ["otile1", "otile2", "otile3", "otile4"],
-	attribution: 'Tiles courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="http://developer.mapquest.com/content/osm/mq_logo.png">. Map data (c) <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> contributors, ODbL.'
-    });
 
+var mapbox = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6IjZjNmRjNzk3ZmE2MTcwOTEwMGY0MzU3YjUzOWFmNWZhIn0.Y8bhBaUMqFiPrDRW9hieoQ', {
+        maxZoom: 19,
+        id: 'mapbox.streets',
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+	'<a href="http://www.openstreetmap.org/copyright">ODbL</a> ' +
+	'| Map tiles &copy; <a href="http://mapbox.com">Mapbox</a>',
+    });
 
 
 var highlightLayer = L.geoJson(null, {
@@ -369,7 +371,7 @@ $.getJSON(config.geojson, function (data) {
 
 var map = L.map("map", {
 	zoomControl:false,
-  layers: [mapquestOSM, featureLayer, highlightLayer]
+  layers: [mapbox, featureLayer, highlightLayer]
 }).fitWorld();
 
 // ESRI geocoder
@@ -401,7 +403,7 @@ if (document.body.clientWidth <= 767) {
   isCollapsed = false;
 }
 var baseLayers = {
-  "Mapquest": mapquestOSM
+  "Mapbox": mapbox
   //"Aerial Imagery": mapquestHYB
 };
 var overlayLayers = {
