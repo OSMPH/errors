@@ -139,7 +139,7 @@ var properties = [{
 },
 {
     value: "_josm_url",
-    label: "Open in JOSM",
+    label: "Open in JOSM RC",
     table: {
       visible: true,
       sortable: false,
@@ -373,11 +373,6 @@ var map = L.map("map", {
 	zoomControl:false,
   layers: [mapbox, featureLayer, highlightLayer]
 }).fitWorld();
-
-// ESRI geocoder
-//var searchControl = L.esri.Geocoding.Controls.geosearch({
-//  useMapBounds: 17
-//}).addTo(map);
 
 // Info control
 var info = L.control({
