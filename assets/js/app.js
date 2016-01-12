@@ -1,7 +1,7 @@
 var config = {
-  geojson: "https://gist.githubusercontent.com/anonymous/ff1279dfd06ec9dad54d/raw/178c7adfb7c879178cb9a1e30e79edc8259bd8a1/results.json",
-  title: "OSMLint",
-  layerName: "OSMLint",
+  geojson: "https://dl.dropboxusercontent.com/s/yf1i83pup49pqep/results.json",
+  title: "Errors",
+  layerName: "Errors",
   hoverProperty: "_osmlint",
   sortProperty: "_osmlint",
   sortOrder: "_osmlint"
@@ -399,7 +399,7 @@ if (document.body.clientWidth <= 767) {
 }
 var baseLayers = {
   "Mapbox": mapbox
-  //"Aerial Imagery": mapquestHYB
+
 };
 var overlayLayers = {
   "<span id='layer-name'>GeoJSON Layer</span>": featureLayer
