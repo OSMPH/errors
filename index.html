@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="author" content="Bryan McBride">
-    <title class="title">GeoJSON Dashboard</title>
+    <title class="title">OSM-PH Errors</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css">
@@ -43,13 +43,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <span class="navbar-brand title">GeoJSON Dashboard</span>
+          <span class="navbar-brand title">osm-ph Errors</span>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li><a id="about-btn" href="#" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-question-circle fa-white"></i> About</a></li>
             <li><a id="chart-btn" href="#" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-bar-chart fa-white"></i> Charts</a></li>
-            <li><a id="extent-btn" href="#" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-arrows-alt fa-white"></i> Feature Extent</a></li>
+            <li><a id="extent-btn" href="#" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-arrows-alt fa-white"></i> View All</a></li>
             <li class="hidden-md hidden-lg"><a id="filter-btn" href="#" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-filter fa-white"></i> Filter Data</a></li>
             <li class="dropdown">
               <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-laptop fa-white"></i> <span id="view">Split View </span><b class="caret"></b></a>
@@ -95,44 +95,40 @@
         <div class="modal-content">
           <div class="modal-header">
             <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">Welcome to the GeoJSON Data Dashboard!</h4>
+            <h4 class="modal-title">Welcome to the OSM-PH Error Dashboard!</h4>
           </div>
           <div class="modal-body">
             <ul class="nav nav-tabs" id="aboutTabs">
               <li class="active"><a href="#about-tab" data-toggle="tab"><i class="fa fa-question-circle"></i> About the project</a></li>
-              <li><a href="#configuration-tab" data-toggle="tab"><i class="fa fa-gear"></i> Configuration</a></li>
+              <li><a href="#configuration-tab" data-toggle="tab"><i class="fa fa-gear"></i> How to fix errors</a></li>
             </ul>
             <div class="tab-content" id="aboutTabsContent">
               <div class="tab-pane fade active in" id="about-tab">
-                <p>A configurable framework for building a geographic "data dashboard" from a GeoJSON file. Open source, MIT licensed, and available on <a href="https://github.com/fulcrumapp/geojson-dashboard" target="_blank">GitHub</a>.</p>
+                <p>Dashboard to help you fix data in OpenStreetMap.</p>
                 <div class="panel panel-primary">
-                  <div class="panel-heading">Features</div>
+                  <div class="panel-heading">Errors</div>
                   <ul class="list-group">
-                    <li class="list-group-item">Flexible template built on active open source components</li>
-                    <li class="list-group-item">Entirely client-side, can be hosted for free on <a href="https://pages.github.com/" target="_blank">GitHub Pages</a></li>
-                    <li class="list-group-item">Built on the incredibly popular <a href="http://getbootstrap.com/" target="_blank">Bootstrap</a> UI framework</li>
-                    <li class="list-group-item">Maps via <a href="http://leafletjs.com/" target="_blank">Leaflet</a>, the leading open source JavaScript mapping library</li>
-                    <li class="list-group-item">Interactive data table with sorting, searching, column toggling, and data export via the <a href="http://bootstrap-table.wenzhixin.net.cn/" target="_blank">Bootstrap Table</a> plugin</li>
-                    <li class="list-group-item">Advanced, interactive GeoJSON data querying that integrates <a href="http://mistic100.github.io/jQuery-QueryBuilder/index.html" target="_blank">jQuery QueryBuilder</a> with <a href="http://alasql.org/" target="_blank">AlaSQL</a></li>
-                    <li class="list-group-item">Advanced charting via <a href="http://c3js.org/" target="_blank">C3.js</a>, the D3-based reusable chart library</li>
+                    <li class="list-group-item"><strong>Bridge on node</strong> - bridge should be a way that is part of the highway.</li>
+                    <li class="list-group-item"><strong>Self intersecting highways</strong> - highways should not self-intersect.</li>
+                    <li class="list-group-item"><strong>Unclosed way</strong> - landuse and building polygons should be a closed way.</li>
+                    <li class="list-group-item"><strong>Missing layer on bridge</strong> - bridges should have a <em>layer</em> tag.</li>
+                    <li class="list-group-item">More soon ...</li>
                   </ul>
                 </div>
+		<p>Data from <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> contributors processed using <a href="https://github.com/osmlab/osmlint" target="_blank">OSMLint</a>.  Dashboard based on <a href="https://github.com/fulcrumapp/geojson-dashboard" target="_blank">Fulcrum Map Dashboard</a>..</p>
               </div>
               <div class="tab-pane fade" id="configuration-tab" >
-                <p>This dashboard is designed to fetch a GeoJSON file and present the data in an interactive environment for exploration and analysis.</p>
+                <p>Use this dashboard to visualize and filter data errors. </p>
                 <ol>
-                  <li>Fork or download the GitHub repo.</li>
-                  <li>Open the <em>assets/js/app.js</em> file and edit the <em>config</em> and <em>properties</em> variables.</li>
-                  <li>The <em>drawCharts()</em> function demonstrates how charts can be configured.</li>
-                  <li>Additional map layers can be added to the global <em>map</em> variable.</li>
-                </ol>
+                  <li>To load data in <strong>JOSM</strong>, activate JOSM's <a href="https://josm.openstreetmap.de/wiki/Help/Preferences/RemoteControl" target="_blank">Remote Control</a>.</li>
+                  <li>Select any error and click the <strong>Open in JOSM</strong> link.</li>
+                  <li>Fix data. Move to the next one in the list</li>
+		 </ol>
                 <p><strong>Notes</strong></p>
                   <ul>
-                    <li>Attempting to load huge GeoJSON files will likely cause browser issues.</li>
-                    <li>The <em>properties.table</em> object accepts <a href="http://bootstrap-table.wenzhixin.net.cn/documentation/#column-options" target="_blank">Bootstrap Table column options</a>.</li>
-                    <li>The <em>properties.filter</em> object accepts <a href="http://mistic100.github.io/jQuery-QueryBuilder/index.html#filters" target="_blank">jQuery QueryBuilder filter options</a>.</li>
-                    <li>Setting the <em>filter.values</em> property to an empty array ([]) will fetch all the distinct values for that property.</li>
-                    <li>Setting the <em>table</em>, <em>filter</em>, or <em>info</em> objects to <em>false</em> will hide them from that component.</li>
+                    <li>If error data is huge it will likely cause browser issues.  Best way is to fix your errors regularly. :)</li>
+                    <li>Data is updated semi-regularly.  If you think it needs a refresh, post a ticket in <a href="https://github.com/osmph/errors" target="_blank">our repo.</a></li>
+		    <li>Want more error detected? Post a ticket in the <a href="https://github.com/osmlab/osmlint" target="_blank">OSMlint repo.</a></li>
                   </ul>
               </div>
             </div>
@@ -155,7 +151,7 @@
             <div role="tabpanel">
               <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active"><a href="#status-chart" aria-controls="reports" role="tab" data-toggle="tab">Errors</a></li>
-                <li role="presentation"><a href="#zone-chart" aria-controls="charts" role="tab" data-toggle="tab">Users</a></li>
+                <li role="presentation"><a href="#zone-chart" aria-controls="charts" role="tab" data-toggle="tab">Top 20 Users</a></li>
               </ul>
               <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="status-chart"></div>

@@ -1,5 +1,6 @@
 var config = {
-  geojson: "https://dl.dropboxusercontent.com/s/yf1i83pup49pqep/results.json",
+  // geojson: "https://gist.githubusercontent.com/anonymous/ff1279dfd06ec9dad54d/raw/178c7adfb7c879178cb9a1e30e79edc8259bd8a1/results.json", //for testing
+  geojson: "https://dl.dropboxusercontent.com/s/yf1i83pup49pqep/results.json", //live errors
   title: "Errors",
   layerName: "Errors",
   hoverProperty: "_osmlint",
@@ -139,7 +140,7 @@ var properties = [{
 },
 {
     value: "_josm_url",
-    label: "Open in JOSM RC",
+    label: "Open in JOSM",
     table: {
       visible: true,
       sortable: false,
@@ -152,7 +153,7 @@ var properties = [{
 function drawCharts() {
   // Errors
   $(function() {
-    var result = alasql("SELECT _osmlint AS label, COUNT(*) AS total FROM ? GROUP BY _osmlint", [features]);
+    var result = alasql("SELECT _osmlint AS label, COUNT(*) AS total FROM ? GROUP BY _osmlint ORDER BY _osmlint.total DESC", [features]);
     var columns = $.map(result, function(_osmlint) {
       return [[_osmlint.label, _osmlint.total]];
     });
@@ -165,11 +166,11 @@ function drawCharts() {
     });
   });
 
-  // Users
+  // Top 20 Users
   $(function() {
-    var result = alasql("SELECT _user AS label, COUNT(*) AS total FROM ? GROUP BY _user", [features]);
+    var result = alasql("SELECT _user AS label, _osmlint AS errors, COUNT(*) AS total FROM ? GROUP BY _user, _osmlint  ORDER BY _user.total DESC LIMIT 20", [features]);
     var columns = $.map(result, function(_user) {
-      return [[_user.label, _user.total]];
+	return [[_user.label, _user.total]];
     });
     var chart = c3.generate({
         bindto: "#zone-chart",
@@ -374,6 +375,11 @@ var map = L.map("map", {
   layers: [mapbox, featureLayer, highlightLayer]
 }).fitWorld();
 
+// ESRI geocoder
+//var searchControl = L.esri.Geocoding.Controls.geosearch({
+//  useMapBounds: 17
+//}).addTo(map);
+
 // Info control
 var info = L.control({
   position: "bottomleft"
@@ -399,7 +405,7 @@ if (document.body.clientWidth <= 767) {
 }
 var baseLayers = {
   "Mapbox": mapbox
-
+  //"Aerial Imagery": mapquestHYB
 };
 var overlayLayers = {
   "<span id='layer-name'>GeoJSON Layer</span>": featureLayer
