@@ -4,4 +4,7 @@
 
 ![Demo](ph_errors.gif)
 
-Based on https://github.com/fulcrumapp/geojson-dashboard
+* Data processed with [OSMLint](https://github.com/osmlab/osmlint).
+* Dashboard based on [Fulcrum Map GeoJSON Dashboard](https://github.com/fulcrumapp/geojson-dashboard).
+
+
