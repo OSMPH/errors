@@ -139,6 +139,22 @@ var properties = [{
     }
 },
 {
+    value: "fixme",
+    label: "fixme",
+    table: {
+      visible: true,
+      sortable: true
+    },
+    filter: {
+      type: "string",
+      input: "checkbox",
+      vertical: true,
+      multiple: true,
+      operators: ["in", "not_in", "equal", "not_equal"],
+      values: []
+    }
+},
+{
     value: "_josm_url",
     label: "Open in JOSM",
     table: {
@@ -166,9 +182,9 @@ function drawCharts() {
     });
   });
 
-  // Top 20 Users
+  // Top 30 Users
   $(function() {
-    var result = alasql("SELECT _user AS label, _osmlint AS errors, COUNT(*) AS total FROM ? GROUP BY _user, _osmlint  ORDER BY _user.total DESC LIMIT 20", [features]);
+    var result = alasql("SELECT _user AS label, _osmlint AS errors, COUNT(*) AS total FROM ? GROUP BY _user, _osmlint  ORDER BY _user.total DESC LIMIT 30", [features]);
     var columns = $.map(result, function(_user) {
 	return [[_user.label, _user.total]];
     });
