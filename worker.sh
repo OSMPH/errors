@@ -2,6 +2,7 @@
 
 DATA=/path/to/data
 PublicData=path/to/public/url
+webhook=https://hooks.slack.com/services/add/webhook/key
 bbox=$1
 
 echo "# Downloading planet..."
@@ -61,5 +62,4 @@ echo "# Posting to slack ..."
 count="$(jq '.features |length' $DATA/results.json)"
 url="http://osmph.github.io/errors/"
 
-curl -X POST --data-urlencode 'payload={"channel": "#general", "username": "errors", "text": "'$count' errors today at '$url'", "icon_emoji": ":mag:"}' \
-     https://hooks.slack.com/services/add/webhook/key
+curl -X POST --data-urlencode 'payload={"channel": "#general", "username": "errors", "text": "'$count' errors today at '$url'", "icon_emoji": ":mag:"}' $webhook
