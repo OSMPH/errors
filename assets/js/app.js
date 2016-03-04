@@ -1,6 +1,6 @@
 var config = {
-	// geojson: "https://gist.githubusercontent.com/anonymous/ff1279dfd06ec9dad54d/raw/178c7adfb7c879178cb9a1e30e79edc8259bd8a1/results.json", //for testing
-	geojson: "https://api-osm-comments-production.tilestream.net/api/v1/changesets/?users=asalasangkay,MonumentoDeIsabelle,Genesis-17:26,jay-jay_jayson,SamSungYoung,Noah%27s_Nails,bryanpiczon&limit=100&sort=-discussed_at&text=", //live feed
+	geojson: "https://gist.githubusercontent.com/anonymous/ff1279dfd06ec9dad54d/raw/178c7adfb7c879178cb9a1e30e79edc8259bd8a1/results.json", //for testing
+	//geojson: "https://api-osm-comments-production.tilestream.net/api/v1/changesets/?users=asalasangkay,MonumentoDeIsabelle,Genesis-17:26,jay-jay_jayson,SamSungYoung,Noah%27s_Nails,bryanpiczon&limit=100&sort=-discussed_at&text=", //live feed
 	title: "Fishy Edits in PH",
 	layerName: "Edits",
 	hoverProperty: "userName",
@@ -111,17 +111,14 @@ var properties = [{
 			sortable: true
 		},
 		filter: false
-	}
-];
+	}];
 
 function drawCharts() {
-	// Errors
+	// Counts
 	$(function() {
 		var result = alasql("SELECT changesetComment AS label, COUNT(*) AS total FROM ? GROUP BY changesetComment ORDER BY changesetComment.total DESC", [features]);
 		var columns = $.map(result, function(changesetComment) {
-			return [
-				[changesetComment.label, changesetComment.total]
-			];
+			return [[changesetComment.label, changesetComment.total]];
 		});
 		var chart = c3.generate({
 			bindto: "#status-chart",
@@ -136,9 +133,7 @@ function drawCharts() {
 	$(function() {
 		var result = alasql("SELECT userName AS label, changesetComment AS errors, COUNT(*) AS total FROM ? GROUP BY userName, changesetComment  ORDER BY userName.total DESC LIMIT 10", [features]);
 		var columns = $.map(result, function(userName) {
-			return [
-				[userName.label, userName.total]
-			];
+			return [[userName.label, userName.total]];
 		});
 		var chart = c3.generate({
 			bindto: "#zone-chart",
